@@ -1,0 +1,43 @@
+############################################################################
+###                     Queue-delivery-service properties                ###
+############################################################################
+server:
+  # 5671 & 5672 -- default ports for amqp(RabbitMQ -- 5672)
+  port: 5671
+  # defining url for app
+  servlet:
+    context-path: /pet/v1/queue-delivery-service
+
+spring:
+  rabbitmq:
+    username: corl
+    password: krol
+  data:
+    # configuration of mongoDB
+    mongodb:
+      authentication-database: admin
+      # db name
+      database: orders
+      # default port for mongoDB: 27017
+      port: 27017
+      host: localhost
+      username: monkey
+      password: dragonborn
+
+
+  application:
+    # service name(can be used in discovery to refer by its name)
+    name: queue-delivery-service
+    # setting custom banner instead of regular
+  banner:
+    location: queue-delivery-banner.txt
+
+eureka:
+  client:
+    serviceUrl:
+      # Url for a discovery service
+      defaultZone: http://localhost:8761/pet/v1/discovery-service/eureka
+  instance:
+    # Flag to say that, when guessing a hostname,
+    # the IP address of the server should be used in preference to the hostname reported by the OS. // From docs
+    preferIpAddress: true

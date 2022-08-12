@@ -1,0 +1,68 @@
+############################################################################
+###                     Security-service properties                      ###
+############################################################################
+server:
+  # 443 -- default port for https
+  port: 4343
+  # defining url for app
+  servlet:
+    context-path: /pet/v1/security-service
+
+spring:
+  application:
+    # service name(can be used in discovery to refer by its name)
+    name: security-service
+  # setting custom banner instead of regular
+  banner:
+    location: security-banner.txt
+
+  datasource:
+    driverClassName: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    #    security_instance
+    username: Final
+    password: FANTASY
+  jpa:
+    #    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    # for firstly going into schema.sql file before data!!
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+
+
+eureka:
+  client:
+    serviceUrl:
+      # Url for a discovery service
+      defaultZone: http://localhost:8761/pet/v1/discovery-service/eureka
+  instance:
+    # Flag to say that, when guessing a hostname,
+    # the IP address of the server should be used in preference to the hostname reported by the OS. // From docs
+    preferIpAddress: true
+
+#security:
+#  oauth2:
+#    client:
+logging:
+  level:
+    web: info
+
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
+#hystrix:
+#  command:
+#    default:
+#      execution:
+#        isolation:
+#          thread:
+#            timeoutInMilliseconds: 80000

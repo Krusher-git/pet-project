@@ -1,0 +1,60 @@
+#All envs will be replaced in kubernetes
+############################################################################################################
+########################### docker-compose --env-file=config/.env up #######################################
+############################################################################################################
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:5.0.9
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb:/data
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$MONGO_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD=$MONGO_PASSWORD
+    networks:
+      - pet-net
+
+  mongo-express:
+    image: mongo-express:1.0.0-alpha
+    container_name: mongo-express
+    ports:
+      - "8081:8081"
+    environment:
+      - ME_CONFIG_MONGODB_ADMINUSERNAME=$ME_ADMINUSERNAME
+      - ME_CONFIG_MONGODB_ADMINPASSWORD=$ME_ADMINPASSWORD
+      - ME_CONFIG_MONGODB_SERVER=mongodb
+    networks:
+      - pet-net
+
+  postgresql:
+    image: postgres:14-alpine
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_USER=$POSTGRES_USER
+      - POSTGRES_PASSWORD=$POSTGRES_PASSWORD
+    volumes:
+      - postgresql:/var/lib/pgsql/data
+    networks:
+      - pet-net
+
+  message-broker:
+    image: rabbitmq:3.10.2-management-alpine
+    container_name: rabbitmq
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      RABBITMQ_DEFAULT_USER: $RABBITMQ_DEFAULT_USER
+      RABBITMQ_DEFAULT_PASS: $RABBITMQ_DEFAULT_PASS
+
+volumes:
+  mongodb: {}
+  postgresql: {}
+
+networks:
+  pet-net:

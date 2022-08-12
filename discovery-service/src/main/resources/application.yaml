@@ -1,0 +1,24 @@
+############################################################################
+###                     Discovery-service properties                     ###
+############################################################################
+server:
+  # 8761 -- default port for eureka server
+  port: 8761
+  # defining url for app
+  servlet:
+    context-path: /pet/v1/discovery-service
+
+eureka:
+  client:
+    # disabling registration of the discovery-service
+    register-with-eureka: false
+    # disabling any fetch from other discovery-services
+    fetch-registry: false
+
+spring:
+  application:
+    # service name(can be used in discovery to refer by its name)
+    name: discovery-service
+  # setting custom banner instead of regular
+  banner:
+    location: discovery-banner.txt
