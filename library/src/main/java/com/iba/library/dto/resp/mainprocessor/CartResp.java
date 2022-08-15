@@ -16,6 +16,6 @@ public class CartResp extends SimpleIDResp {
 
     private Long userId;
 
-    private Set<ProductResp> products;
+    private Set<ProductCostAndSupplierResp> products;
 
 }

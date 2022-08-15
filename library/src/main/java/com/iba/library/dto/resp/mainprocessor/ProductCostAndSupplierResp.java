@@ -12,6 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class ProductCostAndSupplierResp extends SimpleIDResp {
 
+    private ProductResp productResp;
+
     private SupplierResp supplierResp;
 
     private Double cost;

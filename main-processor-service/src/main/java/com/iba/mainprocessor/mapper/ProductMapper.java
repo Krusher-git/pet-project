@@ -14,8 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 //By adding componentModel as spring this interface will be registered in spring context
-@Mapper(componentModel = "spring",
-        uses = {ProductCostAndSupplierMapper.class})
+@Mapper(componentModel = "spring")
 public interface ProductMapper {
     @Mapping(source = "categoryName",
             target = "category",
@@ -37,7 +36,6 @@ public interface ProductMapper {
         }
         return category;
     }
-
     @Mapping(source = "category", target = "categoryName", qualifiedByName = "categoryToStringMap")
     ProductResp toResponse(final Product product);
 

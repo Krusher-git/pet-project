@@ -5,7 +5,7 @@ import com.iba.library.dto.resp.mainprocessor.CartResp;
 import com.iba.mainprocessor.entity.Cart;
 import com.iba.mainprocessor.mapper.CartMapper;
 import com.iba.mainprocessor.repository.CartRepository;
-import com.iba.mainprocessor.repository.ProductRepository;
+import com.iba.mainprocessor.repository.ProductCostAndSupplierRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class CartServiceImpl implements CartService {
 
     private final CartRepository cartRepository;
-    private final ProductRepository productRepository;
+    private final ProductCostAndSupplierRepository productCostAndSupplierRepository;
     private final CartMapper cartMapper;
 
     @Override
@@ -61,7 +61,7 @@ public class CartServiceImpl implements CartService {
                     log.error("Error while getting cart with userId " + id);
                     return new RuntimeException("smth useful");
                 });
-        final Cart cartToUpdate = cartMapper.toEntityFromUpdate(cartUpdateReq, productRepository);
+        final Cart cartToUpdate = cartMapper.toEntityFromUpdate(cartUpdateReq, productCostAndSupplierRepository);
 
         cart.setProducts(cartToUpdate.getProducts());
 

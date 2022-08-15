@@ -21,6 +21,4 @@ public class ProductResp extends SimpleIDResp {
 
     private String categoryName;
 
-    private Set<ProductCostAndSupplierResp> productInfo = new HashSet<>();
-
 }

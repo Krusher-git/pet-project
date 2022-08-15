@@ -2,6 +2,7 @@ package com.iba.security.service;
 
 import com.iba.library.client.MainProcessorFeignClient;
 import com.iba.library.dto.req.security.UserReq;
+import com.iba.library.dto.resp.SimpleIDResp;
 import com.iba.library.dto.resp.security.UserResp;
 import com.iba.security.entity.User;
 import com.iba.security.mapper.UserMapper;
@@ -12,6 +13,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Objects;
 
 @AllArgsConstructor
 @Service
@@ -46,7 +49,13 @@ public class UserServiceImpl implements UserService {
 
         final User savedUser = userRepository.save(newUser);
 
-        mainProcessorFeignClient.createCartWithUserId(savedUser.getId());
+        final SimpleIDResp idResp = mainProcessorFeignClient.createCartWithUserId(savedUser.getId()).getBody();
+
+        if (Objects.isNull(idResp)) {
+            throw new RuntimeException("smth useful");
+        }
+        
+        savedUser.setCartId(idResp.getId());
 
         return userMapper.toResponse(savedUser);
     }

@@ -1,20 +1,29 @@
-insert into roles(name)
-values ('ROLE_USER'),
-       ('ROLE_ADMIN') on conflict do nothing;
+insert into roles(id, name)
+values (1, 'ROLE_USER'),
+       (2, 'ROLE_ADMIN')
+on conflict do nothing;
 
 -- password for Admin: vFantasticFour4
 
-insert into users(name, surname, email, password, is_user_non_locked)
-values ('Administrator',
+insert into users(id, name, surname, email, password, is_user_non_locked, cart_id, role_id)
+values (1,
+        'Administrator',
         'Blank',
         '228@s.cpm',
         '$2a$10$/Q65ZqFqk.oE9YiNCjMJSOl4bvmFZJ1JhsARSfxFJOGJvWbjIUaWe',
-        true) on conflict(email) do nothing;
+        true,
+        1,
+        2)
+on conflict(email) do nothing;
 
--- Insuring Administrator will have exact Admin_Role id
-update users
-set role_id = (select id from roles where name = 'ROLE_ADMIN')
-where name = 'Administrator';
+BEGIN;
+
+LOCK TABLE users, roles IN ACCESS EXCLUSIVE MODE;
+-- updating cursor to prevent exception with users_pkey = 1, the same for roles
+SELECT setval('users_id_seq', COALESCE((SELECT MAX(id) + 1 FROM users), 1), false);
+SELECT setval('roles_id_seq', COALESCE((SELECT MAX(id) + 1 FROM roles), 1), false);
+
+COMMIT;
 
 INSERT
 INTO oauth_client_details (client_id, resource_ids, client_secret, scope, authorized_grant_types,
@@ -42,4 +51,5 @@ VALUES ('main-processor-service',
         3600,
         7200,
         '{}',
-        '') ON CONFLICT DO NOTHING;
+        '')
+ON CONFLICT DO NOTHING;

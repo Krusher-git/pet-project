@@ -22,7 +22,7 @@ public class Cart extends BasicIDEntity {
     @ManyToMany
     @JoinTable(name = "cart_products",
             joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_id"))
-    private Set<Product> products = new HashSet<>();
+            inverseJoinColumns = @JoinColumn(name = "product_info_id"))
+    private Set<ProductCostAndSupplier> products = new HashSet<>();
 
 }

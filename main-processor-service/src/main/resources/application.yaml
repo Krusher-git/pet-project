@@ -20,8 +20,8 @@ spring:
     driverClassName: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/postgres
     #    security_instance
-    username: Final
-    password: FANTASY
+    username: ${POSTGRES_USER}
+    password: ${POSTGRES_PASSWORD}
   jpa:
     #    database: POSTGRESQL
     show-sql: true

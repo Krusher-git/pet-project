@@ -13,8 +13,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
 @Mapper(componentModel = "spring",
-        uses = {SupplierMapper.class})
+        uses = {SupplierMapper.class,
+                ProductMapper.class})
 public interface ProductCostAndSupplierMapper {
+    @Mapping(source = "product", target = "productResp")
     @Mapping(source = "supplier", target = "supplierResp")
     ProductCostAndSupplierResp toResponse(final ProductCostAndSupplier productCostAndSupplier);
 
@@ -29,9 +31,11 @@ public interface ProductCostAndSupplierMapper {
     }
 
     @Named("supplier")
-    default Supplier findSupById(final Long supplierId, @Context SupplierRepository supplierRepository){
+    default Supplier findSupById(final Long supplierId, @Context SupplierRepository supplierRepository) {
         return supplierRepository.findById(supplierId)
                 .orElseThrow(() -> new RuntimeException("smth useful"));
     }
+
+//    ProductCostAndSupplier toEntityFromConcreteProductReq(final ConcreteProductReq concreteProductReq, @Context SupplierRepository supplierRepository, @Context ProductRepository productRepository);
 
 }

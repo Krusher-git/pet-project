@@ -20,4 +20,6 @@ public class UserResp extends SimpleIDResp {
 
     private Boolean isUserNonLocked;
 
+    private Long cartId;
+
 }

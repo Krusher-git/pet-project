@@ -1,7 +1,7 @@
 package com.iba.mainprocessor.controller;
 
 import com.iba.library.dto.req.mainprocessor.CartUpdateReq;
-import com.iba.library.dto.resp.SimpleResp;
+import com.iba.library.dto.resp.SimpleIDResp;
 import com.iba.library.dto.resp.mainprocessor.CartResp;
 import com.iba.mainprocessor.service.CartService;
 import lombok.AllArgsConstructor;
@@ -17,14 +17,14 @@ public class CartControllerImpl implements CartController {
     private final CartService cartService;
 
     @Override
-    public ResponseEntity<SimpleResp> createCartWithUserId(Long userId) {
+    public ResponseEntity<SimpleIDResp> createCartWithUserId(Long userId) {
         final CartResp cartResp = cartService.createCartWithUserId(userId);
 
         log.info("Cart with userId " + userId + " is in creating process");
 
         return ResponseEntity
                 .ok()
-                .body(new SimpleResp());
+                .body(new SimpleIDResp(cartResp.getId()));
     }
 
     @Override

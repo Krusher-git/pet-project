@@ -2,6 +2,7 @@ package com.iba.library.client;
 
 import com.iba.library.dto.req.mainprocessor.CartUpdateReq;
 import com.iba.library.dto.req.mainprocessor.ProductReq;
+import com.iba.library.dto.resp.SimpleIDResp;
 import com.iba.library.dto.resp.SimpleResp;
 import com.iba.library.dto.resp.mainprocessor.CartResp;
 import com.iba.library.dto.resp.mainprocessor.ProductResp;
@@ -15,7 +16,7 @@ public interface MainProcessorFeignClient {
 
     //    CART PART
     @PostMapping("/pet/v1/main-processor-service/cart/{userId}")
-    ResponseEntity<SimpleResp> createCartWithUserId(@PathVariable Long userId);
+    ResponseEntity<SimpleIDResp> createCartWithUserId(@PathVariable Long userId);
 
     @GetMapping("/pet/v1/main-processor-service/cart/{userId}")
     ResponseEntity<CartResp> getCartByUserId(@PathVariable Long userId);

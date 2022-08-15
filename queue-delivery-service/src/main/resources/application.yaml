@@ -10,8 +10,8 @@ server:
 
 spring:
   rabbitmq:
-    username: corl
-    password: krol
+    username: ${RABBITMQ_USER}
+    password: ${RABBITMQ_PASSWORD}
   data:
     # configuration of mongoDB
     mongodb:
@@ -21,8 +21,8 @@ spring:
       # default port for mongoDB: 27017
       port: 27017
       host: localhost
-      username: monkey
-      password: dragonborn
+      username: ${MONGO_USER}
+      password: ${MONGO_PASSWORD}
 
 
   application:

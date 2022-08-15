@@ -34,7 +34,6 @@ public class User extends BasicIDEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     private Role role = new Role();
 
-    //    for now they are zeroes in future may be feign clients or some new logic
     private Long cartId = 0L;
 
     private Long wishlistId = 0L;

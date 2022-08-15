@@ -4,15 +4,16 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
-@NoArgsConstructor
 @Setter
 @Getter
-public class CartUpdateReq {
+@NoArgsConstructor
 
-    private Long id;
+public class ConcreteProductReq {
 
-    private Set<ConcreteProductReq> concreteProducts;
+    private Long productId;
+
+    private Long supplierId;
+
+    private Integer amount;
 
 }
