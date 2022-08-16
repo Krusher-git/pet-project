@@ -1,6 +1,6 @@
 package com.iba.mainprocessor.controller;
 
-import com.iba.library.dto.req.mainprocessor.SupplierProductInfoReq;
+import com.iba.library.dto.req.mainprocessor.ProductInfoReq;
 import com.iba.library.dto.resp.SimpleResp;
 import com.iba.library.dto.resp.mainprocessor.SupplierResp;
 import com.iba.mainprocessor.service.SupplierService;
@@ -27,16 +27,5 @@ public class SupplierControllerImpl implements SupplierController {
                 .body(supplierResp);
     }
 
-    @Override
-    public ResponseEntity<SimpleResp> addNewProductInfo(SupplierProductInfoReq supplierProductInfoReq) {
-
-        supplierService.addNewProductInfo(supplierProductInfoReq);
-
-        log.info("Supplier with id " + supplierProductInfoReq.getSupplierId() + "was issued to renew product with id " + supplierProductInfoReq.getProductId());
-
-        return ResponseEntity
-                .ok()
-                .body(new SimpleResp());
-    }
 
 }

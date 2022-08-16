@@ -4,6 +4,7 @@ import com.iba.library.entity.BasicIDEntity;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -24,9 +25,5 @@ public class Product extends BasicIDEntity {
     // Using string due to opportunity to add some categories which will cause to changing of the position of all elements
     @Enumerated(EnumType.STRING)
     private Category category = Category.ANY;
-
-    // For now this, mb later smth better
-    @OneToMany(mappedBy = "product")
-    private Set<ProductCostAndSupplier> productInfo = new HashSet<>();
 
 }

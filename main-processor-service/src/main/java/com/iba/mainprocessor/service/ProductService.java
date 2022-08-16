@@ -7,4 +7,5 @@ public interface ProductService {
     ProductResp createProduct(final ProductReq productReq);
 
     ProductResp getById(final Long id);
+
 }

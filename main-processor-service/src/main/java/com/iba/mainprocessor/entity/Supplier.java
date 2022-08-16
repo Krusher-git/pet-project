@@ -29,7 +29,4 @@ public class Supplier extends BasicIDEntity {
     // Average customers rating for example or delete later
     private Double rating;
 
-    @OneToMany(mappedBy = "supplier")
-    private Set<ProductCostAndSupplier> suppliersAndCosts = new HashSet<>();
-
 }

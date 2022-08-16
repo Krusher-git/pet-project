@@ -16,8 +16,6 @@ public class ProductReq {
     @NotNull
     private String description;
 
-    @NotNull
     private String categoryName;
-
 
 }

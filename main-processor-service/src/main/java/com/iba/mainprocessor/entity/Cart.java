@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -19,10 +22,7 @@ public class Cart extends BasicIDEntity {
     @Column(name = "user_id", unique = true)
     private Long userId;
 
-    @ManyToMany
-    @JoinTable(name = "cart_products",
-            joinColumns = @JoinColumn(name = "cart_id"),
-            inverseJoinColumns = @JoinColumn(name = "product_info_id"))
-    private Set<ProductCostAndSupplier> products = new HashSet<>();
+    @OneToMany
+    private Set<ProductInfo> products = new HashSet<>();
 
 }

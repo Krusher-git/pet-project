@@ -1,17 +1,12 @@
 package com.iba.mainprocessor.mapper;
 
 import com.iba.library.dto.req.mainprocessor.ProductReq;
-import com.iba.library.dto.resp.mainprocessor.ProductCostAndSupplierResp;
 import com.iba.library.dto.resp.mainprocessor.ProductResp;
 import com.iba.mainprocessor.entity.Category;
 import com.iba.mainprocessor.entity.Product;
-import com.iba.mainprocessor.entity.ProductCostAndSupplier;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
-
-import java.util.HashSet;
-import java.util.Set;
 
 //By adding componentModel as spring this interface will be registered in spring context
 @Mapper(componentModel = "spring")

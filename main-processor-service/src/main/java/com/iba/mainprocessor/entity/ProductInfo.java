@@ -9,12 +9,12 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "products_cost_and_suppliers")
+@Table(name = "products_info")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
 @Setter
-public class ProductCostAndSupplier extends BasicIDEntity {
+public class ProductInfo extends BasicIDEntity {
 
     @ManyToOne
     @JoinColumn(name = "product_id")
@@ -24,9 +24,10 @@ public class ProductCostAndSupplier extends BasicIDEntity {
     @JoinColumn(name = "supplier_id")
     private Supplier supplier;
 
-    @Column(name = "cost")
-    private Double cost;
+    @Column(name = "price")
+    private Double price;
 
-    private Integer amount;
+    @Column(name = "available_amount")
+    private Integer availableAmount;
 
 }

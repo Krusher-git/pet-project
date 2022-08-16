@@ -5,6 +5,7 @@ import com.iba.library.dto.resp.mainprocessor.ProductResp;
 import com.iba.mainprocessor.entity.Product;
 import com.iba.mainprocessor.mapper.ProductMapper;
 import com.iba.mainprocessor.repository.ProductRepository;
+import com.iba.mainprocessor.repository.SupplierRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
@@ -25,16 +26,20 @@ public class ProductServiceImpl implements ProductService {
     public ProductResp createProduct(ProductReq productReq) {
 
         final Product newProduct = productMapper.toEntity(productReq);
-        productRepository.save(newProduct);
+        final Product savedProduct = productRepository.save(newProduct);
 
-        return productMapper.toResponse(newProduct);
+        log.info("Product with id: " + savedProduct.getId() + " created");
+
+        return productMapper.toResponse(savedProduct);
     }
 
     @Override
     public ProductResp getById(Long id) {
         final Product product = productRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("Error while getting product with id " + id);
+
+                    log.error("ProductService: Error while getting product with id " + id);
+
                     return new RuntimeException("replace with smth useful");
                 });
 

@@ -16,6 +16,8 @@ public class SupplierResp extends SimpleIDResp {
 
     private String address;
 
+    private String description;
+
     private Double rating;
 
 }

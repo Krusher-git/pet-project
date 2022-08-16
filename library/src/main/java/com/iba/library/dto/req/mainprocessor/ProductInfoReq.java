@@ -7,14 +7,14 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-public class SupplierProductInfoReq {
+public class ProductInfoReq {
 
     private Long productId;
 
     private Long supplierId;
 
-    private Double cost;
+    private Double price;
 
-    private Integer amount;
+    private Integer availableAmount;
 
 }
