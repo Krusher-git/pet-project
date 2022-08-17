@@ -1,6 +1,7 @@
 package com.iba.mainprocessor.mapper;
 
 import com.iba.library.dto.req.mainprocessor.ProductInfoReq;
+import com.iba.library.dto.resp.mainprocessor.ProductInfoResp;
 import com.iba.mainprocessor.entity.Product;
 import com.iba.mainprocessor.entity.ProductInfo;
 import com.iba.mainprocessor.entity.Supplier;
@@ -11,7 +12,8 @@ import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.mapstruct.Named;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring",
+        uses = {ProductMapper.class, SupplierMapper.class})
 public interface ProductInfoMapper {
 
     @Mapping(target = "id", ignore = true)
@@ -32,5 +34,8 @@ public interface ProductInfoMapper {
         return supplierRepository.findById(supplierId)
                 .orElseThrow(() -> new RuntimeException("replace with smth useful"));
     }
+    @Mapping(source = "product", target = "productResp")
+    @Mapping(source = "supplier", target = "supplierResp")
+    ProductInfoResp toResponse(final ProductInfo productInfo);
 
 }

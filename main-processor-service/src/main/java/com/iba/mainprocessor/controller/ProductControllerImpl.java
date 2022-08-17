@@ -19,7 +19,7 @@ public class ProductControllerImpl implements ProductController {
     public ResponseEntity<ProductResp> createProduct(ProductReq productReq) {
         final ProductResp productResp = productService.createProduct(productReq);
 
-        log.info("New product is in creating process, with name " + productReq.getName());
+        log.info("ProductController: New product is in creating process, with name " + productReq.getName());
 
         return ResponseEntity
                 .ok()

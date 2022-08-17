@@ -20,7 +20,7 @@ public class SupplierControllerImpl implements SupplierController {
     public ResponseEntity<SupplierResp> getSupplierById(final Long id) {
         final SupplierResp supplierResp = supplierService.getById(id);
 
-        log.info("Supplier with id " + id + "was issued");
+        log.info("SupplierController: Supplier with id " + id + "was issued");
 
         return ResponseEntity
                 .ok()

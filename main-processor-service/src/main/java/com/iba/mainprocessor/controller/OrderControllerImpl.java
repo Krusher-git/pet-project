@@ -18,7 +18,7 @@ public class OrderControllerImpl implements OrderController {
     @Override
     public ResponseEntity<SimpleResp> sendForProcessing(CartForOrderReq cartForOrderReq) {
 
-        log.info("sending cart to order");
+        log.info("OrderController: sending cart to order");
 
         orderService.sendForProcessing(cartForOrderReq);
 

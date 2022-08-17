@@ -23,12 +23,10 @@ public class ConcreteProductInfo extends BasicIDEntity {
     @JoinColumn(name = "product_info_id")
     private ProductInfo productInfo;
 
-    private Double price;
-
     private Integer selectedAmount;
 
-//    @ManyToOne
-//    @JoinColumn(name = "cart_id")
-//    private Cart cart;
+    @ManyToOne
+    @JoinColumn(name = "cart_id")
+    private Cart cart;
 
 }

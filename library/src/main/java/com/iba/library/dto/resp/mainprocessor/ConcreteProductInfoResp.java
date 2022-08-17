@@ -6,16 +6,14 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 @Setter
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CartResp extends SimpleIDResp {
+public class ConcreteProductInfoResp extends SimpleIDResp {
 
-    private Long userId;
+    private ProductInfoResp productInfoResp;
 
-    private Set<ConcreteProductInfoResp> products;
+    private Integer selectedAmount;
 
 }

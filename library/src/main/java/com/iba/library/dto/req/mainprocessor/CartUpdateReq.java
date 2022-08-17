@@ -13,6 +13,6 @@ public class CartUpdateReq {
 
     private Long id;
 
-    private Set<ConcreteProductReq> concreteProducts;
+    private Set<ConcreteProductInfoReq> concreteProducts;
 
 }

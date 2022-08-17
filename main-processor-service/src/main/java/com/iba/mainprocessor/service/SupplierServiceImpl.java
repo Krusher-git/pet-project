@@ -22,7 +22,7 @@ public class SupplierServiceImpl implements SupplierService {
         final Supplier supplier = supplierRepository.findById(id)
                 .orElseThrow(() -> {
 
-                    log.error("Error occurred when getting supplier with id " + id);
+                    log.error("SupplierService.SupplierRepository: Error occurred when getting supplier with id " + id);
 
                     return new RuntimeException("replace with smth useful");
                 });

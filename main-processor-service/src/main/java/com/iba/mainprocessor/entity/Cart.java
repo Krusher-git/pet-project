@@ -23,6 +23,6 @@ public class Cart extends BasicIDEntity {
     private Long userId;
 
     @OneToMany
-    private Set<ProductInfo> products = new HashSet<>();
+    private Set<ConcreteProductInfo> products = new HashSet<>();
 
 }

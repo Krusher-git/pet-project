@@ -7,13 +7,10 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-
-public class ConcreteProductReq {
+public class BasicProductInfoReq {
 
     private Long productId;
 
     private Long supplierId;
-
-    private Integer amount;
 
 }

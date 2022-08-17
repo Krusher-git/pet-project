@@ -1,6 +1,7 @@
 package com.iba.mainprocessor.service;
 
 import com.iba.library.dto.req.mainprocessor.ProductInfoReq;
+import com.iba.library.dto.resp.mainprocessor.ProductInfoResp;
 import com.iba.mainprocessor.entity.ProductInfo;
 import com.iba.mainprocessor.mapper.ProductInfoMapper;
 import com.iba.mainprocessor.repository.ProductInfoRepository;
@@ -23,12 +24,12 @@ public class ProductInfoServiceImpl implements ProductInfoService {
 
     @Override
     @Transactional
-    public void createProductInfo(ProductInfoReq productInfoReq) {
+    public ProductInfoResp createProductInfo(ProductInfoReq productInfoReq) {
         final ProductInfo newProductInfo = productInfoMapper.toEntity(productInfoReq, productRepository, supplierRepository);
 
         final ProductInfo savedProduct = productInfoRepository.save(newProductInfo);
 
-
+        return productInfoMapper.toResponse(savedProduct);
     }
 
 }

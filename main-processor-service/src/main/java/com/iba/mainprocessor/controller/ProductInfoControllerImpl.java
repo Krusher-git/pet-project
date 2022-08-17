@@ -1,7 +1,7 @@
 package com.iba.mainprocessor.controller;
 
 import com.iba.library.dto.req.mainprocessor.ProductInfoReq;
-import com.iba.library.dto.resp.SimpleResp;
+import com.iba.library.dto.resp.mainprocessor.ProductInfoResp;
 import com.iba.mainprocessor.service.ProductInfoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,15 +15,16 @@ public class ProductInfoControllerImpl implements ProductInfoController {
     private final ProductInfoService productInfoService;
 
     @Override
-    public ResponseEntity<SimpleResp> createProductInfo(ProductInfoReq productInfoReq) {
-        productInfoService.createProductInfo(productInfoReq);
+    public ResponseEntity<ProductInfoResp> createProductInfo(ProductInfoReq productInfoReq) {
+        final ProductInfoResp productInfoResp = productInfoService.createProductInfo(productInfoReq);
 
-        log.info("Supplier with id " + productInfoReq.getSupplierId() + "was issued to renew product with id " + productInfoReq.getProductId());
+        log.info("ProductInfoController: added product with productId: " + productInfoReq.getProductId() + " and supplierId: " + productInfoReq.getSupplierId());
 
         return ResponseEntity
                 .ok()
-                .body(new SimpleResp());
+                .body(productInfoResp);
     }
+
 }
 
 

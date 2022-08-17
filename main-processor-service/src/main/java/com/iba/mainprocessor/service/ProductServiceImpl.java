@@ -28,7 +28,7 @@ public class ProductServiceImpl implements ProductService {
         final Product newProduct = productMapper.toEntity(productReq);
         final Product savedProduct = productRepository.save(newProduct);
 
-        log.info("Product with id: " + savedProduct.getId() + " created");
+        log.info("ProductService: Product with id: " + savedProduct.getId() + " created");
 
         return productMapper.toResponse(savedProduct);
     }

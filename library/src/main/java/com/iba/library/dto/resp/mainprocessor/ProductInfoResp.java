@@ -6,18 +6,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductCostAndSupplierResp extends SimpleIDResp {
+public class ProductInfoResp extends SimpleIDResp {
 
     private ProductResp productResp;
 
     private SupplierResp supplierResp;
 
-    private Double cost;
+    private Double price;
 
-    private Integer amount;
+    private Integer availableAmount;
 
 }

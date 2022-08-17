@@ -1,7 +1,7 @@
 package com.iba.mainprocessor.controller;
 
 import com.iba.library.dto.req.mainprocessor.ProductInfoReq;
-import com.iba.library.dto.resp.SimpleResp;
+import com.iba.library.dto.resp.mainprocessor.ProductInfoResp;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public interface ProductInfoController {
 
     @PostMapping
-    ResponseEntity<SimpleResp> createProductInfo(final @RequestBody ProductInfoReq productInfoReq);
+    ResponseEntity<ProductInfoResp> createProductInfo(final @RequestBody ProductInfoReq productInfoReq);
 
 }
