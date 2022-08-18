@@ -11,10 +11,8 @@ import java.util.Set;
 @NoArgsConstructor
 public class CartForOrderReq {
 
-    private Long userId;
+    private Long id;
 
-    private Set<Long> productIds;
-
-    private Set<Long> supplierIds;
+    private Set<ConcreteProductInfoReq> finalProducts;
 
 }

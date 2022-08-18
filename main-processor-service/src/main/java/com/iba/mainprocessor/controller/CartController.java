@@ -1,5 +1,6 @@
 package com.iba.mainprocessor.controller;
 
+import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
 import com.iba.library.dto.req.mainprocessor.CartUpdateReq;
 import com.iba.library.dto.resp.SimpleIDResp;
 import com.iba.library.dto.resp.mainprocessor.CartResp;
@@ -17,5 +18,8 @@ public interface CartController {
 
     @PutMapping
     ResponseEntity<CartResp> updateCartByUserId(@RequestBody CartUpdateReq cartUpdateReq);
+
+    @PostMapping("/order")
+    ResponseEntity<CartResp> sendForProcessing(@RequestBody CartForOrderReq cartForOrderReq);
 
 }

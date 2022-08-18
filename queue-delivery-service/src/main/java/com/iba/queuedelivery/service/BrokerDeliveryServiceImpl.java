@@ -1,7 +1,7 @@
 package com.iba.queuedelivery.service;
 
+import com.iba.library.dto.req.queuedelivery.OrderReq;
 import com.iba.library.dto.resp.queuedelivery.OrderResp;
-import com.iba.queuedelivery.entity.Order;
 import com.iba.queuedelivery.mapper.OrderMapper;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -21,8 +21,9 @@ public class BrokerDeliveryServiceImpl implements BrokerDeliveryService {
     private final AmqpTemplate amqpTemplate;
 
     @Override
-    public void sendToQueue(Order order) {
-        final OrderResp orderResp = orderMapper.toResponse(order);
+    public void sendToEmailQueue(String id, OrderReq orderReq) {
+        final OrderResp orderResp = orderMapper.toResponseFromRequest(orderReq);
+        orderResp.setId(id);
 
         amqpTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, EMAIL_ROUTING_KEY, orderResp);
     }

@@ -1,8 +1,8 @@
 package com.iba.queuedelivery.service;
 
-import com.iba.queuedelivery.entity.Order;
+import com.iba.library.dto.req.queuedelivery.OrderReq;
 
 public interface BrokerDeliveryService {
-    void sendToQueue(final Order order);
+    void sendToEmailQueue(final String id, final OrderReq orderReq);
 
 }

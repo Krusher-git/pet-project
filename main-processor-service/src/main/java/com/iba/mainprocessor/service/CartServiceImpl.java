@@ -1,7 +1,10 @@
 package com.iba.mainprocessor.service;
 
+import com.iba.library.client.QueueDeliveryFeignClient;
+import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
 import com.iba.library.dto.req.mainprocessor.CartUpdateReq;
 import com.iba.library.dto.req.mainprocessor.ConcreteProductInfoReq;
+import com.iba.library.dto.req.queuedelivery.OrderReq;
 import com.iba.library.dto.resp.mainprocessor.CartResp;
 import com.iba.mainprocessor.entity.Cart;
 import com.iba.mainprocessor.entity.ConcreteProductInfo;
@@ -24,7 +27,10 @@ public class CartServiceImpl implements CartService {
 
     private final ConcreteProductInfoService concreteProductInfoService;
 
+    private final QueueDeliveryFeignClient queueDeliveryFeignClient;
+
     @Override
+    @Transactional
     public CartResp createCartWithUserId(Long userId) {
         cartRepository.findCartByUserId(userId)
                 .ifPresent(cart -> {
@@ -39,9 +45,9 @@ public class CartServiceImpl implements CartService {
         final Cart newCart = new Cart();
         newCart.setUserId(userId);
 
-        cartRepository.save(newCart);
+        final Cart savedCart = cartRepository.save(newCart);
 
-        return cartMapper.toResponse(newCart);
+        return cartMapper.toResponse(savedCart);
     }
 
     @Override
@@ -79,5 +85,21 @@ public class CartServiceImpl implements CartService {
         return cartMapper.toResponse(cart);
     }
 
+    @Override
+    @Transactional
+    public CartResp sendForProcessing(CartForOrderReq cartForOrderReq) {
+        final CartUpdateReq cartUpdateReq = new CartUpdateReq();
+
+        cartUpdateReq.setId(cartForOrderReq.getId());
+        cartUpdateReq.setConcreteProducts(cartForOrderReq.getFinalProducts());
+
+        //  Updating cart with final values
+        final CartResp order = updateCart(cartUpdateReq);
+
+        //  Sending cartOrder to queueDeliveryService
+        queueDeliveryFeignClient.processOrder(new OrderReq(order));
+
+        return order;
+    }
 
 }

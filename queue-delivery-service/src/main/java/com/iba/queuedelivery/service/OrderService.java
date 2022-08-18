@@ -1,9 +1,9 @@
 package com.iba.queuedelivery.service;
 
 
-import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
+import com.iba.library.dto.req.queuedelivery.OrderReq;
 
 public interface OrderService {
-    void processOrder(final CartForOrderReq cartForOrderReq);
+    void processOrder(final OrderReq orderReq);
 
 }

@@ -1,6 +1,6 @@
 package com.iba.queuedelivery.controller;
 
-import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
+import com.iba.library.dto.req.queuedelivery.OrderReq;
 import com.iba.library.dto.resp.SimpleResp;
 import com.iba.queuedelivery.service.OrderService;
 import lombok.AllArgsConstructor;
@@ -15,8 +15,8 @@ public class OrderControllerImpl implements OrderController {
     private final OrderService orderService;
 
     @Override
-    public ResponseEntity<SimpleResp> processOrder(CartForOrderReq cartForOrderReq) {
-        orderService.processOrder(cartForOrderReq);
+    public ResponseEntity<SimpleResp> processOrder(OrderReq orderReq) {
+        orderService.processOrder(orderReq);
 
         log.info("started processing order");
 

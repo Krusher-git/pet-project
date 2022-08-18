@@ -1,5 +1,6 @@
 package com.iba.mainprocessor.controller;
 
+import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
 import com.iba.library.dto.req.mainprocessor.CartUpdateReq;
 import com.iba.library.dto.resp.SimpleIDResp;
 import com.iba.library.dto.resp.mainprocessor.CartResp;
@@ -47,6 +48,16 @@ public class CartControllerImpl implements CartController {
         return ResponseEntity
                 .ok()
                 .body(cartResp);
+    }
+
+    @Override
+    public ResponseEntity<CartResp> sendForProcessing(CartForOrderReq cartForOrderReq) {
+
+        final CartResp finalOrder = cartService.sendForProcessing(cartForOrderReq);
+
+        return ResponseEntity
+                .ok()
+                .body(finalOrder);
     }
 
 }

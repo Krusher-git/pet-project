@@ -1,6 +1,9 @@
 package com.iba.library.dto.resp.queuedelivery;
 
+import com.iba.library.dto.resp.mainprocessor.ConcreteProductInfoResp;
 import lombok.*;
+
+import java.util.Set;
 
 @Setter
 @Getter
@@ -13,12 +16,6 @@ public class OrderResp {
 
     private Long userId;
 
-    private Long productId;
-
-    private Long supplierId;
-
-    private Double price;
-
-    private Integer amount;
+    private Set<ConcreteProductInfoResp> products;
 
 }
