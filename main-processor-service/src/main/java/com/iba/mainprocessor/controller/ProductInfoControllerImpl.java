@@ -18,7 +18,7 @@ public class ProductInfoControllerImpl implements ProductInfoController {
     public ResponseEntity<ProductInfoResp> createProductInfo(ProductInfoReq productInfoReq) {
         final ProductInfoResp productInfoResp = productInfoService.createProductInfo(productInfoReq);
 
-        log.info("ProductInfoController: added product with productId: " + productInfoReq.getProductId() + " and supplierId: " + productInfoReq.getSupplierId());
+        log.info("ProductInfoController.createProductInfo: added product with productId: " + productInfoReq.getProductId() + " and supplierId: " + productInfoReq.getSupplierId());
 
         return ResponseEntity
                 .ok()

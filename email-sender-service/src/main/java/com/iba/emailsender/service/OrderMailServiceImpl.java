@@ -27,11 +27,18 @@ public class OrderMailServiceImpl implements OrderMailService {
     @Override
     @Transactional
     public void sendDetailOrderMail(OrderResp orderResp) {
-//        TODO: get by ids all info from main-processor or change orderResp to contain all needed data
+
         final Long userId = orderResp.getUserId();
-        final UserResp userResp = securityFeignClient.getUserById(userId).getBody();
+
+        final UserResp userResp =
+                securityFeignClient
+                        .getUserById(userId)
+                        .getBody();
 
         if (Objects.isNull(userResp)) {
+
+            log.error("OrderMailService.sendDetailOrderMail: error when getting user with id: " + userId);
+
             throw new RuntimeException("smth useful");
         }
 
@@ -43,12 +50,31 @@ public class OrderMailServiceImpl implements OrderMailService {
 
     private String setMessage(final Set<ConcreteProductInfoResp> products) {
         return products.stream()
-                .map(concreteProductInfoResp -> {
-//                    concreteProductInfoResp.
-                })
+                .map(this::createReadableMessage)
                 .collect(
-                        Collectors.joining("\n,", "Orders:\n", ".")
+                        Collectors.joining(";\n", "Orders:\n\n", ".")
                 );
+    }
+
+    private String createReadableMessage(final ConcreteProductInfoResp concreteProductInfoResp) {
+        final String productName = concreteProductInfoResp.getProductInfoResp().getProductResp().getName();
+        final String productDescription = concreteProductInfoResp.getProductInfoResp().getProductResp().getDescription();
+        final Double productPrice = concreteProductInfoResp.getProductInfoResp().getPrice();
+        final Integer productQuantity = concreteProductInfoResp.getSelectedAmount();
+        final String supplierName = concreteProductInfoResp.getProductInfoResp().getSupplierResp().getName();
+        return """
+                Product:
+                                
+                    name: %s,
+                    description: %s,
+                    price: %.2f,
+                    quantity: %x,
+                    supplier name: %s""".formatted(
+                productName,
+                productDescription,
+                productPrice,
+                productQuantity,
+                supplierName);
     }
 
 }

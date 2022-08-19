@@ -73,7 +73,7 @@ public class CartServiceImpl implements CartService {
         final Cart cart = cartRepository.findById(id)
                 .orElseThrow(() -> {
 
-                    log.error("CartService.CartRepository: Error while getting cart with userId " + id);
+                    log.error("CartService.updateCart.cartRepository: Error while getting cart with userId " + id);
 
                     return new RuntimeException("smth useful");
                 });

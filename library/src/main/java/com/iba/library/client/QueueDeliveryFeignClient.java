@@ -1,6 +1,5 @@
 package com.iba.library.client;
 
-import com.iba.library.dto.req.mainprocessor.CartForOrderReq;
 import com.iba.library.dto.req.queuedelivery.OrderReq;
 import com.iba.library.dto.resp.SimpleResp;
 import org.springframework.cloud.openfeign.FeignClient;

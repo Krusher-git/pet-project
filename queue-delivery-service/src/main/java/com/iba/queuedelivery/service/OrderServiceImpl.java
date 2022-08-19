@@ -7,6 +7,7 @@ import com.iba.queuedelivery.entity.OrderInfo;
 import com.iba.queuedelivery.mapper.OrderInfoMapper;
 import com.iba.queuedelivery.repository.OrderRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +16,7 @@ import java.util.Set;
 
 @Service
 @AllArgsConstructor
+@Log4j2
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
@@ -22,11 +24,11 @@ public class OrderServiceImpl implements OrderService {
 
     private final BrokerDeliveryService brokerDeliveryService;
 
-    //TODO: REPLACE TEMPLATE
     @Override
     @Transactional
     public void processOrder(OrderReq orderReq) {
         final Set<ConcreteProductInfoResp> productInfoResps = orderReq.getFinalOrder().getProducts();
+        final Long userId = orderReq.getFinalOrder().getUserId();
 
         final Set<OrderInfo> orderInfos = new HashSet<>();
         productInfoResps.forEach(concreteProductInfoResp ->
@@ -36,9 +38,12 @@ public class OrderServiceImpl implements OrderService {
 
         final Order order = new Order();
         order.setGoods(orderInfos);
+        order.setUserId(userId);
 
         final Order savedOrder = orderRepository.save(order);
         final String id = savedOrder.getId();
+
+        log.info("OrderService.processOrder: Order with id: " + id + " is created");
 
         brokerDeliveryService.sendToEmailQueue(id, orderReq);
     }

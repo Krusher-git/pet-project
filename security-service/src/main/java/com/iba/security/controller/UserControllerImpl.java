@@ -20,7 +20,7 @@ public class UserControllerImpl implements UserController {
 
         final UserResp userResp = userService.createUser(userReq);
 
-        log.info("User with email " + userReq.getEmail() + " is on creating process");
+        log.info("UserController.createUser: User with email " + userReq.getEmail() + " is created");
 
         return ResponseEntity
                 .ok()
@@ -31,7 +31,7 @@ public class UserControllerImpl implements UserController {
     public ResponseEntity<UserResp> getUserById(Long id) {
         final UserResp userResp = userService.getUserById(id);
 
-        log.info("User with id " + id + " was issued");
+        log.info("UserController.getUserById: User with id " + id + " was issued");
 
         return ResponseEntity
                 .ok()

@@ -25,6 +25,8 @@ public class BrokerDeliveryServiceImpl implements BrokerDeliveryService {
         final OrderResp orderResp = orderMapper.toResponseFromRequest(orderReq);
         orderResp.setId(id);
 
+        log.info("BrokerDeliveryService.sendToEmailQueue: sending order to queue with id: " + id);
+
         amqpTemplate.convertAndSend(TOPIC_EXCHANGE_NAME, EMAIL_ROUTING_KEY, orderResp);
     }
 

@@ -42,7 +42,9 @@ public class UserServiceImpl implements UserService {
         newUser.setRole(
                 roleRepository.findByName(ROLE_USER)
                         .orElseThrow(() -> {
-                            log.error("Error occurred while getting role " + ROLE_USER);
+
+                            log.error("UserService.createUser.roleRepository: Error occurred while getting role " + ROLE_USER);
+
                             return new RuntimeException("Error with user, replace someday");
                         })
         );
@@ -52,9 +54,11 @@ public class UserServiceImpl implements UserService {
         final SimpleIDResp idResp = mainProcessorFeignClient.createCartWithUserId(savedUser.getId()).getBody();
 
         if (Objects.isNull(idResp)) {
+            log.error("UserService.createUser: Error occurred during creating cart: idResp is NUll");
+
             throw new RuntimeException("smth useful");
         }
-        
+
         savedUser.setCartId(idResp.getId());
 
         return userMapper.toResponse(savedUser);
@@ -64,7 +68,9 @@ public class UserServiceImpl implements UserService {
     public UserResp getUserById(Long id) {
         final User user = userRepository.findById(id)
                 .orElseThrow(() -> {
-                    log.error("Error with user with id " + id);
+
+                    log.error("UserService.getUserById.roleRepository: Error getting with id " + id);
+
                     return new RuntimeException("Error with user, replace someday");
                 });
 

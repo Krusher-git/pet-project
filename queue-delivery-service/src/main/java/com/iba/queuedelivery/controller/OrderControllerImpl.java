@@ -18,7 +18,7 @@ public class OrderControllerImpl implements OrderController {
     public ResponseEntity<SimpleResp> processOrder(OrderReq orderReq) {
         orderService.processOrder(orderReq);
 
-        log.info("started processing order");
+        log.info("OrderController.processOrder: processed");
 
         return ResponseEntity
                 .ok()

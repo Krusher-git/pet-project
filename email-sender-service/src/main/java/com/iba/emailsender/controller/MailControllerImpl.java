@@ -1,7 +1,7 @@
 package com.iba.emailsender.controller;
 
-import com.iba.library.dto.req.emailsender.SimpleMailReq;
 import com.iba.emailsender.service.MailService;
+import com.iba.library.dto.req.emailsender.SimpleMailReq;
 import com.iba.library.dto.resp.SimpleResp;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -18,9 +18,9 @@ public class MailControllerImpl implements MailController {
     @Override
     public ResponseEntity<SimpleResp> sendSimpleMail(SimpleMailReq simpleMailReq) {
 
-        log.info(simpleMailReq.getMailBody());
-
         mailService.sendSimpleMail(simpleMailReq);
+
+        log.info("MailController.sendSimpleMail: sending mail with recipient: " + simpleMailReq.getRecipient());
 
         return ResponseEntity
                 .ok()

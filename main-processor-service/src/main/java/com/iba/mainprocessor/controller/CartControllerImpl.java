@@ -21,7 +21,7 @@ public class CartControllerImpl implements CartController {
     public ResponseEntity<SimpleIDResp> createCartWithUserId(Long userId) {
         final CartResp cartResp = cartService.createCartWithUserId(userId);
 
-        log.info("CartController: Cart with userId " + userId + " is in creating process");
+        log.info("CartController.createCartWithUserId: Cart with userId " + userId + " is in creating process");
 
         return ResponseEntity
                 .ok()
@@ -32,7 +32,7 @@ public class CartControllerImpl implements CartController {
     public ResponseEntity<CartResp> getCartByUserId(Long userId) {
         final CartResp cartResp = cartService.getCartByUserId(userId);
 
-        log.info("CartController: Cart with userId " + userId + " was issued");
+        log.info("CartController.getCartByUserId: Cart with userId " + userId + " was issued");
 
         return ResponseEntity
                 .ok()
@@ -40,10 +40,10 @@ public class CartControllerImpl implements CartController {
     }
 
     @Override
-    public ResponseEntity<CartResp> updateCartByUserId(CartUpdateReq cartUpdateReq) {
+    public ResponseEntity<CartResp> updateCart(CartUpdateReq cartUpdateReq) {
         final CartResp cartResp = cartService.updateCart(cartUpdateReq);
 
-        log.info("CartController: Cart with id " + cartUpdateReq.getId() + " was issued to update");
+        log.info("CartController.updateCart: Cart with id " + cartUpdateReq.getId() + " was issued to update");
 
         return ResponseEntity
                 .ok()
@@ -52,6 +52,8 @@ public class CartControllerImpl implements CartController {
 
     @Override
     public ResponseEntity<CartResp> sendForProcessing(CartForOrderReq cartForOrderReq) {
+
+        log.info("CartController.sendForProcessing: Cart with id " + cartForOrderReq.getId() + " is sending");
 
         final CartResp finalOrder = cartService.sendForProcessing(cartForOrderReq);
 

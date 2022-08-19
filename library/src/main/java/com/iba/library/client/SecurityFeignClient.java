@@ -16,7 +16,7 @@ public interface SecurityFeignClient {
     @PostMapping("/pet/v1/security-service/user")
     ResponseEntity<UserResp> createUser(@RequestBody UserReq userReq);
 
-    @GetMapping("/pet/v1/security-service/{id}")
+    @GetMapping("/pet/v1/security-service/user/{id}")
     ResponseEntity<UserResp> getUserById(@PathVariable Long id);
 
 }

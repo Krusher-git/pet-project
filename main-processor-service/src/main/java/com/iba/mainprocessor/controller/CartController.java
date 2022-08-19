@@ -17,7 +17,7 @@ public interface CartController {
     ResponseEntity<CartResp> getCartByUserId(@PathVariable Long userId);
 
     @PutMapping
-    ResponseEntity<CartResp> updateCartByUserId(@RequestBody CartUpdateReq cartUpdateReq);
+    ResponseEntity<CartResp> updateCart(@RequestBody CartUpdateReq cartUpdateReq);
 
     @PostMapping("/order")
     ResponseEntity<CartResp> sendForProcessing(@RequestBody CartForOrderReq cartForOrderReq);

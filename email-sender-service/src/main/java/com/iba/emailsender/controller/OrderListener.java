@@ -16,7 +16,7 @@ public class OrderListener {
     @RabbitListener(queues = "email_queue")
     public void processOrder(final OrderResp orderResp) {
 
-        log.info("got new order for processing");
+        log.info("OrderListener.processOrder: processing order with id: " + orderResp.getId() + " and userId: " + orderResp.getUserId());
 
         orderMailService.sendDetailOrderMail(orderResp);
 

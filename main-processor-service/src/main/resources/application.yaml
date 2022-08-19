@@ -41,6 +41,14 @@ eureka:
     # Flag to say that, when guessing a hostname,
     # the IP address of the server should be used in preference to the hostname reported by the OS. // From docs
     preferIpAddress: true
+feign:
+  hystrix:
+    enabled: true
+  client:
+    config:
+      default:
+        connectTimeout: 160000000
+        readTimeout: 160000000
 
 #security:
 #  oauth2:
